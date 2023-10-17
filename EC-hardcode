@@ -1,0 +1,42 @@
+;Programa hardcore "completar com nome"
+;Introdução ao Assembly
+;Autor: Gabriel Lucas
+;Version: Gabriel Lucas Santos de Lima, Curso Engenharia da Computação
+
+section .data
+    msg1 db "A soma é: ", 0xa, 0xb
+    len1 equ $ - msg1
+    
+    
+section .bss
+    res resb 1 ;Armazena o valor do resultado
+    
+section .text
+    global _start
+    
+_start: 
+    mov eax, 3
+    mov ebx, 4
+;Soma dos dois valores
+    add eax, ebx
+;Converte o resultado em ASCII
+    add eax, '0'
+;Armazena o resultado na variavel res
+    mov [res], eax
+;Segura o primero valor
+    mov eax, 4
+    mov ebx, 1
+    mov ecx, msg1
+    mov edx, len1
+    int 0x80
+;Segura o segundo valor 
+    mov eax, 4
+    mov ebx, 1
+    mov ecx, res
+    mov edx, 2
+;Termina o programa
+    mov eax, 1
+    xor ebx, ebx
+    int 0x80
+    
+    
